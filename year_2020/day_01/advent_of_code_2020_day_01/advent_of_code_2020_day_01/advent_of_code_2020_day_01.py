@@ -16,7 +16,7 @@ def readExpensesFile(filename):
 def partOneFind2NumbersThatSum(total, expenseList):
     multipliedAnswer = 0
     countOfElements = len(expenseList)
-    found2020Pair = False
+    foundPair = False
 
     #compare each element to each element AFTER it in the list, to avoid duplicate comparisons
     for firstIdx in range(countOfElements):
@@ -24,22 +24,68 @@ def partOneFind2NumbersThatSum(total, expenseList):
             firstNum = expenseList[firstIdx]
             secondNum = expenseList[secondIdx]
 
-            if firstNum + secondNum == 2020:
+            if firstNum + secondNum == total:
                 multipliedAnswer = firstNum * secondNum
-                print("Found two numbers summing to 2020. First, " + str(firstNum) + ", Second, " + str(secondNum) + ", Multiplied, " + str(multipliedAnswer))
-                found2020Pair = True
+                print("Found two numbers summing to " + str(total) + ". First, " + str(firstNum) + ", Second, " + str(secondNum) + ", Multiplied, " + str(multipliedAnswer))
+                foundPair = True
                 break
 
-        if found2020Pair:
+        if foundPair:
             break
 
-    if found2020Pair:
+    if foundPair:
         print("Successfully found a pair!")
     else:
         print("Failed to find pair")
+
+def partTwoFind3NumbersThatSum(total, expenseList):
+    multipliedAnswer = 0
+    countOfElements = len(expenseList)
+    foundTriplet = False
+
+    #brute force - check every combination
+    #if the list had been sorted - could start from the highest number, and then early out on combinations we know will be too large
+    for firstIdx in range(countOfElements):
+        for secondIdx in range(countOfElements):
+            
+            if firstIdx == secondIdx: # don't compare against ourselves
+                continue
+
+            firstNum = expenseList[firstIdx]
+            secondNum = expenseList[secondIdx]
+
+            firstPlusSecond = firstNum + secondNum
+
+            if firstPlusSecond >= total: # have we already exceeded our target - in which case, nothing in the 3rd inner loop can succeed
+                continue
+
+            for thirdIdx in range(countOfElements):
+                if secondIdx == thirdIdx and firstIdx == thirdIdx: # don't compare against ourselves
+                    continue
+
+                thirdNum = expenseList[thirdIdx]
+
+                if thirdNum + firstPlusSecond == total:
+                    multipliedAnswer = firstNum * secondNum * thirdNum
+                    print("Found three numbers summing to " + str(total) + ". First, " + str(firstNum) + ", Second, " + str(secondNum) + ", Third, " + str(thirdNum) + ", Multiplied, " + str(multipliedAnswer))
+                    foundTriplet = True
+                    break
+
+            if foundTriplet:
+                break
+
+        if foundTriplet:
+            break
+    
+    if foundTriplet:
+        print("Successfully found a triplet!")
+    else:
+        print("Failed to find triplet")
 
 # MAIN
 fileExpenses = readExpensesFile(expenseFileName)
 
 partOneFind2NumbersThatSum(2020, fileExpenses)
+
+partTwoFind3NumbersThatSum(2020, fileExpenses)
 

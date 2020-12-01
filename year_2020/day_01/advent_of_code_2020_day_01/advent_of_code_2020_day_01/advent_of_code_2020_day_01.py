@@ -1,4 +1,6 @@
 
+from Timer import Timer
+
 fileExpenses = []
 expenseFileName = "expenses_input.txt"
 
@@ -83,9 +85,37 @@ def partTwoFind3NumbersThatSum(total, expenseList):
         print("Failed to find triplet")
 
 # MAIN
+applicationTimer = Timer()
+########################################################
+fileLoadTimer = Timer()
+
 fileExpenses = readExpensesFile(expenseFileName)
+
+fileLoadTime = fileLoadTimer.elapsedTime()
+print("File load complete. It took (s), " + str(fileLoadTime))
+print("\n")
+
+########################################################
+
+partOneTimer = Timer()
 
 partOneFind2NumbersThatSum(2020, fileExpenses)
 
+partOneTime = partOneTimer.elapsedTime()
+print("Part One. It took (s), " + str(partOneTime))
+print("\n")
+
+########################################################
+
+partTwoTimer = Timer()
+
 partTwoFind3NumbersThatSum(2020, fileExpenses)
 
+partTwoTime = partTwoTimer.elapsedTime()
+print("Part Two. It took (s), " + str(partTwoTime))
+print("\n")
+
+########################################################
+
+applicationTime = applicationTimer.elapsedTime()
+print("Application complete. It took (s), " + str(applicationTime))

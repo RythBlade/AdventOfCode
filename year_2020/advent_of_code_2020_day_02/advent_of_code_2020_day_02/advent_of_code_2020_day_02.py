@@ -19,7 +19,8 @@ print('Reading password file')
 passwordFile = readPasswordFile(passwordFileName)
 print('Password file read')
 
-countOfValidPasswords = 0
+countOfValidPasswordsPart1 = 0
+countOfValidPasswordsPart2 = 0
 
 print('Parsing and counting valid passwords')
 for line in passwordFile:
@@ -29,9 +30,14 @@ for line in passwordFile:
      password = splitLine[1].strip()
      policy = passwordPolicy.parsePasswordPolicyFromString(policyString)
 
-     if policy.isPasswordValid(password) == True:
-        countOfValidPasswords += 1
+     if policy.isPasswordValidPart1(password) == True:
+        countOfValidPasswordsPart1 += 1
+        
+     if policy.isPasswordValidPart2(password) == True:
+        countOfValidPasswordsPart2 += 1
 
-print('Parse complete. There are, ' + str(countOfValidPasswords) + ', valid passwords')
+print('Parse complete.')
+print('Part 1: There are, ' + str(countOfValidPasswordsPart1) + ', valid passwords')
+print('Part 2: There are, ' + str(countOfValidPasswordsPart2) + ', valid passwords')
 
 print('Application complete. Time taken (s): ' + str(applicationTimer.elapsedTime()))

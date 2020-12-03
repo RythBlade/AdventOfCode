@@ -36,9 +36,18 @@ map = Map(loadMapFile(mapFilename))
 print("Map file read, " + mapFilename)
 
 #############################################
-treesEncountered = part1TreesEncountered(map, 0, 0, 3, 1)
+treesEncounteredPart1 = part1TreesEncountered(map, 0, 0, 3, 1)
+print("Part 1. Trees encountered, " + str(treesEncounteredPart1))
 #############################################
 
-print("Part 1. Trees encountered, " + str(treesEncountered))
+#############################################
+treesMultipliedTogetherForPart2 = part1TreesEncountered(map, 0, 0, 1, 1)
+treesMultipliedTogetherForPart2 *= part1TreesEncountered(map, 0, 0, 3, 1)
+treesMultipliedTogetherForPart2 *= part1TreesEncountered(map, 0, 0, 5, 1)
+treesMultipliedTogetherForPart2 *= part1TreesEncountered(map, 0, 0, 7, 1)
+treesMultipliedTogetherForPart2 *= part1TreesEncountered(map, 0, 0, 1, 2)
+
+print("Part 2. Trees multiplied together, " + str(treesMultipliedTogetherForPart2))
+#############################################
 
 print("Application completed. Time taken (s), " + str(applicationTimer.elapsedTime()))
